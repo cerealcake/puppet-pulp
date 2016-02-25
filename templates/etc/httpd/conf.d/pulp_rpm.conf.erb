@@ -24,7 +24,7 @@ AddType application/x-x509-ca-cert .crt
 Alias /pulp/exports /var/www/pub/yum/https/exports
 
 <Directory /var/www/pub/yum/https>
-    WSGIAccessScript /usr/share/pulp/wsgi/repo_auth.wsgi
+    WSGIAccessScript <%= scope.lookupvar("pulp::docroot") rescue "/usr/share/pulp/wsgi" %>/repo_auth.wsgi
     SSLRequireSSL
     SSLVerifyClient <%= scope['pulp::ssl_verify_client'] %>
     SSLVerifyDepth 9
@@ -41,7 +41,7 @@ Alias /pulp/exports /var/www/pub/yum/https/exports
 Alias /pulp/isos /var/www/pub/https/isos
 
 <Directory /var/www/pub/https/isos>
-    WSGIAccessScript /usr/share/pulp/wsgi/repo_auth.wsgi
+    WSGIAccessScript <%= scope.lookupvar("pulp::docroot") rescue "/usr/share/pulp/wsgi" %>/repo_auth.wsgi
     SSLRequireSSL
     SSLVerifyClient <%= scope['pulp::ssl_verify_client'] %>
     SSLVerifyDepth 2

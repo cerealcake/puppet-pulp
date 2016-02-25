@@ -7,7 +7,7 @@
 Alias /pulp/ostree /var/www/pub/ostree/
 
 <Directory /var/www/pub/ostree>
-    WSGIAccessScript /usr/share/pulp/wsgi/repo_auth.wsgi
+    WSGIAccessScript <%= scope.lookupvar("pulp::docroot") rescue "/usr/share/pulp/wsgi" %>/repo_auth.wsgi
     SSLRequireSSL
     SSLVerifyClient <%= scope['pulp::ssl_verify_client'] %>
     SSLVerifyDepth 2
