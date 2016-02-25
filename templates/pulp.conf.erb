@@ -20,10 +20,10 @@ WSGIDaemonProcess pulp user=apache group=apache processes=3 display-name=%{GROUP
 #WSGIRestrictStdout Off
 
 WSGISocketPrefix run/wsgi
-WSGIScriptAlias /pulp/api /usr/share/pulp/wsgi/webservices.wsgi
-WSGIImportScript /usr/share/pulp/wsgi/webservices.wsgi process-group=pulp application-group=pulp
+WSGIScriptAlias /pulp/api <%= scope.lookupvar("pulp::docroot") rescue "/usr/share/pulp/wsgi" %>/webservices.wsgi
+WSGIImportScript <%= scope.lookupvar("pulp::docroot") rescue "/usr/share/pulp/wsgi" %>/webservices.wsgi process-group=pulp application-group=pulp
 
-<Directory /usr/share/pulp/wsgi>
+<Directory <%= scope.lookupvar("pulp::docroot") rescue "/usr/share/pulp/wsgi" %>>
 <%- if scope.function_versioncmp([@apache_version, '2.4']) >= 0 -%>
   Require all granted
 <% else -%>
