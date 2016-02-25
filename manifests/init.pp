@@ -271,6 +271,7 @@ class pulp (
   $default_login             = $pulp::params::default_login,
   $default_password          = $pulp::params::default_password,
   $debugging_mode            = $pulp::params::debugging_mode,
+  $docroot                   = $pulp::params::docroot,
   $log_level                 = $pulp::params::log_level,
   $server_working_directory  = $pulp::params::server_working_directory,
   $rsa_key                   = $pulp::params::rsa_key,

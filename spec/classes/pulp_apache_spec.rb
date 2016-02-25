@@ -91,6 +91,19 @@ describe 'pulp::apache' do
       end
     end
 
+    describe 'with docroot /srv/pulp' do
+      let :pre_condition do
+        "class {'pulp': docroot => '/srv/pulp' }"
+      end
+
+      it 'should configure apache with docroot set to /srv/pulp' do
+        is_expected.to contain_apache__vhost('pulp-https').with({
+          :docroot                 => '/srv/pulp',
+          :wsgi_import_script      => '/srv/pulp/webservices.wsgi',
+        })
+      end
+    end
+
     describe 'with manage_httpd true or manage_plugins_httpd true' do
       let :pre_condition do
         "class {'pulp': manage_httpd => true}"
